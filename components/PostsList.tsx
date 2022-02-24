@@ -7,9 +7,8 @@ interface PostsListProps {
 }
 
 function PostsList({ posts }: PropsWithChildren<PostsListProps>) {
-  console.log('ee');
   return (
-    <ul className="space-y-6">
+    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {posts.map((post) => (
         <li key={post.link}>
           <PostCard post={post} />

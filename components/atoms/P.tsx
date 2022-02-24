@@ -1,7 +1,9 @@
-import { PropsWithChildren } from "react";
+import { HTMLAttributes, PropsWithChildren } from 'react';
 
-function P({ children }: PropsWithChildren<{}>) {
-  return <p>{children}</p>;
+interface PProps extends HTMLAttributes<HTMLParagraphElement> {}
+
+function P({ children, ...props }: PropsWithChildren<PProps>) {
+  return <p {...props}>{children}</p>;
 }
 
 export { P };

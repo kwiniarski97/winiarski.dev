@@ -17,7 +17,8 @@ export const posts: Post[] = [
     link: '2',
     title: 'post title',
     coverImg: '/placeholder.jpeg',
-    summary: 'some test post i got to create lol',
+    summary:
+      'some test post i got to create lol some test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lol',
     publishedAt: 1643913060509,
     createdAt: 1643913060509,
   },
