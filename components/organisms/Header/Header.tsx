@@ -1,7 +1,5 @@
 import { Button, ButtonTheme } from 'components/atoms/Button/Button';
-import Image from 'next/image';
 import Link from 'next/link';
-import logoSrc from 'public/images/brand/logo_black_cut.png';
 import React, { PropsWithChildren, useMemo } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
@@ -37,11 +35,8 @@ function Menu(props: PropsWithChildren<{ items: MenuItems }>) {
   );
 }
 
-function Logo() {
-  return <Image src={logoSrc} alt="logo" height={30} width={159} />;
-}
-
 function useMenuItems() {
+  ng;
   const menuItems = useMemo((): MenuItems => {
     return [
       { label: 'Blog', href: '/blog' },
@@ -64,12 +59,14 @@ function Header() {
   const { menuItems } = useMenuItems();
 
   return (
-    <div className="p-2 container m-auto">
-      <header className="flex items-center gap-4">
-        <Logo />
-        <HamburgerMenu />
-        <Menu items={menuItems} />
-      </header>
+    <div className="w-full bg-white shadow-2xl">
+      <div className="p-2 container m-auto ">
+        <header className="flex items-center gap-4">
+          <h1 className="text-xl italic">winiarski.dev</h1>
+          <HamburgerMenu />
+          <Menu items={menuItems} />
+        </header>
+      </div>
     </div>
   );
 }

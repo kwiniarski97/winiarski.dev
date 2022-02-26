@@ -8,7 +8,7 @@ function Layout({ children }: PropsWithChildren<{}>) {
     <div className={currentThemeClass}>
       <Header></Header>
       <Aside></Aside>
-      <main className="container mx-auto my-4">{children}</main>
+      <main className="container px-2 mx-auto my-4">{children}</main>
       <Footer></Footer>
     </div>
   );

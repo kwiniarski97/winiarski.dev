@@ -36,6 +36,9 @@ module.exports = {
           900: 'var(--secondary-900)',
         },
       },
+      minHeight: {
+        56: '14rem',
+      },
     },
   },
   plugins: [

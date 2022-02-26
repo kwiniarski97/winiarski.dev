@@ -16,18 +16,19 @@ export function PostCard({ post }: PropsWithChildren<PostCardProps>) {
   return (
     <article
       className={clsx(
-        'flex flex-col gap-2 shadow-lg rounded-xl overflow-hidden'
+        'flex flex-col md:flex-row gap-2 shadow-lg rounded-xl overflow-hidden min-h-56 bg-white'
       )}
     >
-      <Image
-        src={post.coverImg}
-        alt={post.title}
-        width={300}
-        height={200}
-        objectFit="cover"
-      />
-      <div className="flex flex-col justify-between grow p-4">
-        <div>
+      <div className="h-40 md:h-auto md:w-1/4 relative">
+        <Image
+          src={post.coverImg}
+          alt={post.title}
+          objectFit="cover"
+          layout="fill"
+        />
+      </div>
+      <div className="md:w-3/4 flex flex-col justify-between p-4 gap-3">
+        <div className="flex-grow">
           <H1>{post.title}</H1>
           <P className="line-clamp-4">{post.summary}</P>
         </div>
@@ -35,7 +36,7 @@ export function PostCard({ post }: PropsWithChildren<PostCardProps>) {
           <SubText>{getFormattedDate(post.publishedAt)}</SubText>
         </div>
         <Link href={post.link} passHref>
-          <Button theme={ButtonTheme.Primary} className="mt-2">
+          <Button theme={ButtonTheme.Primary} className="md:mr-0 md:ml-auto">
             Read more
           </Button>
         </Link>

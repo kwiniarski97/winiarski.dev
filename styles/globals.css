@@ -23,6 +23,8 @@
   --secondary-700: rgb(189, 23, 189);
   --secondary-800: rgb(151, 18, 151);
   --secondary-900: rgb(123, 15, 123);
+
+  @apply bg-stone-50;
 }
 
 h1 {
