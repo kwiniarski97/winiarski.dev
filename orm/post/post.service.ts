@@ -5,19 +5,14 @@ import { postRepository } from 'orm/post/post.repository';
 const pageSize = 10;
 
 export const postService = {
-  getPostByLink(link: string): Post | undefined {
-    return postRepository.getAllPosts().find((post) => post.link === link);
+  async getPostByLink(link: string): Promise<Post | undefined> {
+    return await postRepository.getSinglePost('link', link);
   },
 
-  getPostById(id: number): Post | undefined {
-    return postRepository.getAllPosts().find((post) => post.id === id);
-  },
-
-  getPostsByPage({ pageNo }: { pageNo: number }) {
+  async getPostsByPage({ pageNo }: { pageNo: number }) {
     const start = (pageNo - 1) * pageSize;
     const end = pageNo * pageSize;
-    console.log(start, end);
-    return postRepository.getPosts({ start, end });
+    return await postRepository.getPosts({ start, end });
   },
 
   getNumberOfPages(): number {

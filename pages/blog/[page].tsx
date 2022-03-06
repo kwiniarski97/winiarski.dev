@@ -17,7 +17,7 @@ export default Posts;
 export async function getStaticProps(context: any) {
   const { page } = context.params;
   const pageNo = Number(page);
-  const posts = postService.getPostsByPage({ pageNo });
+  const posts = await postService.getPostsByPage({ pageNo });
   return {
     props: { posts },
   };

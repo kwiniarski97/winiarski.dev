@@ -6,7 +6,7 @@ interface PostsListProps {
   posts: Post[];
 }
 
-function PostsList({ posts }: PropsWithChildren<PostsListProps>) {
+function PostsList({ posts = [] }: PropsWithChildren<PostsListProps>) {
   return (
     <ul className="grid grid-cols-1 gap-4">
       {posts.map((post) => (

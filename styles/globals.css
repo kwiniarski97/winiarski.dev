@@ -30,3 +30,7 @@
 h1 {
   @apply text-4xl font-extrabold inline;
 }
+
+.link {
+  @apply underline decoration-dotted hover:decoration-solid;
+}

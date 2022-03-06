@@ -1,9 +1,9 @@
 import { ComponentStory } from '@storybook/react';
+import { PostCard } from 'components/organisms/PostCard/PostCard';
 import React from 'react';
-import { PostCard } from './PostCard';
 
 export default {
-  title: 'components/molecules/PostCard',
+  title: 'components/organisms/PostCard',
   component: PostCard,
 };
 
@@ -15,12 +15,11 @@ export const Default = Template.bind({});
 
 Default.args = {
   post: {
-    id: 1,
     link: '123',
     title: 'title',
     summary: 'summary summary summary',
     coverImg: 'http://placekitten.com/g/200/300',
-    createdAt: 1643913060509,
     publishedAt: 1643913060509,
+    categories: ['books', 'tutorials'],
   },
 };
