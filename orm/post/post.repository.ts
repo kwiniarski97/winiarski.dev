@@ -1,43 +1,7 @@
-import * as fs from 'fs';
-import { sortBy as _sortBy } from 'lodash';
+import { difference, sortBy as _sortBy } from 'lodash';
+import { PostFilterModel } from 'orm/post/post-filter.model';
 import { Post, UniquePostAttributes } from 'orm/post/post.model';
-
-// todo: find a better way to get metadata from post directory
-export const posts: Post[] = [
-  {
-    link: '1',
-    title: 'post title',
-    coverImg: '/placeholder.jpeg',
-    summary: 'some test post i got to create lol',
-    publishedAt: 1643913060509,
-    categories: [],
-  },
-  {
-    link: '2',
-    title: 'post title',
-    coverImg: '/placeholder.jpeg',
-    summary:
-      'some test post i got to create lol some test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lolsome test post i got to create lol',
-    publishedAt: 1643913060509,
-    categories: [],
-  },
-  {
-    link: '3',
-    title: 'post title',
-    coverImg: '/placeholder.jpeg',
-    summary: 'some test post i got to create lol',
-    publishedAt: 1643913060509,
-    categories: [],
-  },
-  {
-    link: '4',
-    title: 'post title',
-    coverImg: '/placeholder.jpeg',
-    summary: 'some test post i got to create lol',
-    publishedAt: 1643913060509,
-    categories: [],
-  },
-];
+import posts from './posts.preval';
 
 interface GetPostParams {
   start: number;
@@ -45,19 +9,22 @@ interface GetPostParams {
   sortBy?: keyof Post;
 }
 
-export const postRepository = {
-  getAllPosts(
-    { sortBy }: { sortBy: keyof Post } = { sortBy: 'publishedAt' }
-  ): Promise<Post[]> {
-    return new Promise((resolve, error) => {
-      fs.readdir('pages/post', (error, files) => {
-        console.log('getAllPosts');
-        console.log(files);
-      });
+const filterPosts = (posts: Post[], filters: PostFilterModel = {}): Post[] => {
+  console.log(posts);
+  return posts.filter(
+    // todo extract to util
+    (post) => difference(filters.categories, post.categories).length === 0
+  );
+};
 
-      const sortedPosts = _sortBy(posts, sortBy);
-      resolve(sortedPosts);
-    });
+type getAllPostsProps = PostFilterModel & { sortBy?: keyof Post };
+
+export const postRepository = {
+  async getAllPosts(props: getAllPostsProps = {}): Promise<Post[]> {
+    const filteredPosts = filterPosts(posts, props);
+    const sortedPosts = _sortBy(filteredPosts, props.sortBy || 'publishedAt');
+
+    return sortedPosts;
   },
 
   getSinglePost(
@@ -68,18 +35,12 @@ export const postRepository = {
   },
 
   async getPosts(params: GetPostParams): Promise<Post[]> {
-    return new Promise((resolve, reject) => {
-      console.log('postRepository, getAllPost');
-      fs.readdir('pages/post', (error, files) => {
-        console.log('getPosts');
-        console.log(files);
-      });
-      const { start = 0, end = 10, sortBy = 'publishedAt' } = params;
-      resolve(_sortBy(posts.slice(start, end), sortBy));
-    });
+    const { start = 0, end = 10, sortBy = 'publishedAt' } = params;
+    return _sortBy(posts.slice(start, end), sortBy);
   },
 
-  getNumberOfItems() {
-    return posts.length;
+  async getNumberOfItems(filters: PostFilterModel): Promise<number> {
+    const allPosts = await this.getAllPosts(filters);
+    return allPosts.length;
   },
 };

@@ -23,9 +23,8 @@ export async function getStaticProps(context: any) {
   };
 }
 
-export function getStaticPaths() {
-  const numberOfPages = postService.getNumberOfPages();
-  console.log(numberOfPages);
+export async function getStaticPaths() {
+  const numberOfPages = await postService.getNumberOfPages();
 
   return {
     // Returns a list of all possible pages

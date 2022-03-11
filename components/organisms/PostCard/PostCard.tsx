@@ -4,6 +4,7 @@ import { CategoriesLinkList } from 'components/molecules/CategoriesLinkList/Cate
 import Image from 'next/image';
 import { Post } from 'orm';
 import { PropsWithChildren } from 'react';
+import { routes } from 'router/routes';
 import { getFormattedDate } from 'utils';
 
 interface PostCardProps {
@@ -20,8 +21,8 @@ export function PostCard({ post }: PropsWithChildren<PostCardProps>) {
       {post.coverImg && (
         <div className="h-40 md:h-auto md:w-1/4 relative">
           <Image
-            src={post.coverImg}
-            alt={post.title}
+            src={post.coverImg.src}
+            alt={post.coverImg.alt}
             objectFit="cover"
             layout="fill"
           />
@@ -29,10 +30,10 @@ export function PostCard({ post }: PropsWithChildren<PostCardProps>) {
       )}
       <div className="md:w-3/4 flex flex-col justify-between p-4 gap-3">
         <div className="flex-grow">
-          <Link href={post.link}>
+          <Link href={routes.getPostRoute(post.slug)}>
             <H1>{post.title}</H1>
           </Link>
-          <P className="line-clamp-4">{post.summary}</P>
+          <P className="line-clamp-4">{post.excerpt}</P>
         </div>
         <div className="flex justify-between">
           <SubText>
@@ -40,11 +41,6 @@ export function PostCard({ post }: PropsWithChildren<PostCardProps>) {
           </SubText>
           <SubText>{getFormattedDate(post.publishedAt)}</SubText>
         </div>
-        {/*<Link href={post.link} passHref>*/}
-        {/*  <Button theme={ButtonTheme.Primary} className="md:mr-0 md:ml-auto">*/}
-        {/*    Read more*/}
-        {/*  </Button>*/}
-        {/*</Link>*/}
       </div>
     </article>
   );

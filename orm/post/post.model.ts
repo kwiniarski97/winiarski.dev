@@ -1,15 +1,19 @@
 import { Category } from 'orm/category/category.model';
 
-export type UniquePostAttributes = 'link';
+export type UniquePostAttributes = 'slug';
 
 export interface Post {
   /**
-   * Link is unique and it works as id.
+   * slug is unique and it works as id.
    */
-  link: string;
+  slug: string;
   title: string;
-  summary: string;
+  excerpt: string;
   categories: Category[];
-  coverImg?: string;
-  publishedAt: number;
+  coverImg?: {
+    src: string;
+    alt?: string;
+  };
+  publishedAt: Date;
+  content: string;
 }

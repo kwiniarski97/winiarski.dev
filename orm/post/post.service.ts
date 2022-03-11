@@ -1,21 +1,25 @@
+import { PAGE_SIZE } from 'consts/page-size';
+import { PostFilterModel } from 'orm/post/post-filter.model';
 import { Post } from 'orm/post/post.model';
 import { postRepository } from 'orm/post/post.repository';
 
-// todo: refactor to global env
-const pageSize = 10;
-
 export const postService = {
-  async getPostByLink(link: string): Promise<Post | undefined> {
-    return await postRepository.getSinglePost('link', link);
+  async getAllPosts(): Promise<Post[]> {
+    return postRepository.getAllPosts();
   },
 
   async getPostsByPage({ pageNo }: { pageNo: number }) {
-    const start = (pageNo - 1) * pageSize;
-    const end = pageNo * pageSize;
+    const start = (pageNo - 1) * PAGE_SIZE;
+    const end = pageNo * PAGE_SIZE;
     return await postRepository.getPosts({ start, end });
   },
 
-  getNumberOfPages(): number {
-    return Math.ceil(postRepository.getNumberOfItems() / pageSize);
+  async getNumberOfPages(filters: PostFilterModel = {}): Promise<number> {
+    return Math.ceil(
+      (await postRepository.getNumberOfItems(filters)) / PAGE_SIZE
+    );
+  },
+  async getPost(slug: string): Promise<Post | undefined> {
+    return postRepository.getSinglePost('slug', slug);
   },
 };

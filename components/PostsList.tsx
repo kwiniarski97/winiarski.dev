@@ -10,7 +10,7 @@ function PostsList({ posts = [] }: PropsWithChildren<PostsListProps>) {
   return (
     <ul className="grid grid-cols-1 gap-4">
       {posts.map((post) => (
-        <li key={post.link}>
+        <li key={post.slug}>
           <PostCard post={post} />
         </li>
       ))}

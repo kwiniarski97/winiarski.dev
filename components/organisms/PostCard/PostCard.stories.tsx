@@ -15,11 +15,12 @@ export const Default = Template.bind({});
 
 Default.args = {
   post: {
-    link: '123',
+    slug: '123',
     title: 'title',
-    summary: 'summary summary summary',
-    coverImg: 'http://placekitten.com/g/200/300',
-    publishedAt: 1643913060509,
+    excerpt: 'summary summary summary',
+    coverImg: { src: 'https://placekitten.com/g/200/300' },
+    publishedAt: new Date(),
     categories: ['books', 'tutorials'],
+    content: '',
   },
 };
