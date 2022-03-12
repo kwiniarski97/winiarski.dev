@@ -8,6 +8,10 @@ export const postService = {
     return postRepository.getAllPosts();
   },
 
+  /**
+   *
+   * @param pageNo - 1 indexed, if you want first page you should pass 1
+   */
   async getPostsByPage({ pageNo }: { pageNo: number }) {
     const start = (pageNo - 1) * PAGE_SIZE;
     const end = pageNo * PAGE_SIZE;

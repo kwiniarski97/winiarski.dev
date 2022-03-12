@@ -1,3 +1,4 @@
+import { POSTS_DIRECTORY } from 'consts/posts-directory';
 import * as fs from 'fs';
 import matter from 'gray-matter';
 import preval from 'next-plugin-preval';
@@ -5,12 +6,12 @@ import { Post } from 'orm/post/post.model';
 import path from 'path';
 
 async function getPosts(): Promise<Post[]> {
-  const folderEntries = fs.readdirSync('pages/post');
+  const folderEntries = fs.readdirSync(POSTS_DIRECTORY);
   const mdxFiles = folderEntries.filter(
     (file) => path.extname(file) === '.mdx'
   );
   const postsData = mdxFiles.map((file) => {
-    const fileMetaData = matter.read(`_posts/${file}`, {
+    const fileMetaData = matter.read(`${POSTS_DIRECTORY}/${file}`, {
       excerpt: false,
     });
 
@@ -22,6 +23,8 @@ async function getPosts(): Promise<Post[]> {
       content: fileMetaData.content,
     } as Post;
   });
+
+  console.log('Preevaluted posts:', postsData);
 
   return postsData;
 }

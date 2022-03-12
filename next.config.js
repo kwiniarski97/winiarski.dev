@@ -26,15 +26,6 @@ module.exports = withPreval(
 
       return config;
     },
-    async redirects() {
-      return [
-        {
-          source: '/',
-          destination: '/1',
-          permanent: true,
-        },
-      ];
-    },
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   })
 );

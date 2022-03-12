@@ -10,7 +10,6 @@ interface GetPostParams {
 }
 
 const filterPosts = (posts: Post[], filters: PostFilterModel = {}): Post[] => {
-  console.log(posts);
   return posts.filter(
     // todo extract to util
     (post) => difference(filters.categories, post.categories).length === 0
@@ -21,6 +20,7 @@ type getAllPostsProps = PostFilterModel & { sortBy?: keyof Post };
 
 export const postRepository = {
   async getAllPosts(props: getAllPostsProps = {}): Promise<Post[]> {
+    console.log('posts', posts);
     const filteredPosts = filterPosts(posts, props);
     const sortedPosts = _sortBy(filteredPosts, props.sortBy || 'publishedAt');
 

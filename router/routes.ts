@@ -7,4 +7,7 @@ export const routes = {
   getPostRoute(slug: string) {
     return `/post/${slug}`;
   },
+  getHomeRoute() {
+    return '/';
+  },
 };
