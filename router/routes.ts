@@ -10,4 +10,7 @@ export const routes = {
   getHomeRoute() {
     return '/';
   },
+  getPostsPage(page: number) {
+    return `/${page}`;
+  },
 };

@@ -20,7 +20,6 @@ type getAllPostsProps = PostFilterModel & { sortBy?: keyof Post };
 
 export const postRepository = {
   async getAllPosts(props: getAllPostsProps = {}): Promise<Post[]> {
-    console.log('posts', posts);
     const filteredPosts = filterPosts(posts, props);
     const sortedPosts = _sortBy(filteredPosts, props.sortBy || 'publishedAt');
 
@@ -39,7 +38,7 @@ export const postRepository = {
     return _sortBy(posts.slice(start, end), sortBy);
   },
 
-  async getNumberOfItems(filters: PostFilterModel): Promise<number> {
+  async countPosts(filters: PostFilterModel = {}): Promise<number> {
     const allPosts = await this.getAllPosts(filters);
     return allPosts.length;
   },

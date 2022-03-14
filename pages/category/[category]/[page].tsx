@@ -11,7 +11,7 @@ interface Props {
 }
 
 function CategoryPage({ category, page }: PropsWithChildren<Props>) {
-  const posts = postService.getPostsByPage({ pageNo: page });
+  const posts = postService.getPostsPage({ pageNo: page });
   return <>{category}</>;
 }
 

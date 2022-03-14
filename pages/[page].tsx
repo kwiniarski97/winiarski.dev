@@ -1,15 +1,42 @@
-import { PostsList } from 'components/PostsList';
+import { PostsList } from 'components/templates/PostsList/PostsList';
+import { useGlobalLoadingContext } from 'features/loading/GlobalLoadingProvider';
 import { range } from 'lodash';
+import { useRouter } from 'next/router';
 import { Post } from 'orm';
 import { postService } from 'orm/post/post.service';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useCallback } from 'react';
+import { routes } from 'router/routes';
 
 interface Pages {
   posts: Post[];
+  pageNo: number;
+  totalPages: number;
 }
 
-function Posts({ posts }: PropsWithChildren<Pages>) {
-  return <PostsList posts={posts} />;
+function Posts({ posts, pageNo, totalPages }: PropsWithChildren<Pages>) {
+  const router = useRouter();
+  const { setIsLoading } = useGlobalLoadingContext();
+
+  const handlePageChange = useCallback(
+    async (page: number) => {
+      const pageRoute = routes.getPostsPage(page);
+      setIsLoading(true);
+      await router.push(pageRoute);
+      setIsLoading(false);
+    },
+    [router, setIsLoading]
+  );
+
+  return posts?.length ? (
+    <PostsList
+      posts={posts}
+      page={pageNo}
+      totalPages={totalPages}
+      onPageChange={handlePageChange}
+    />
+  ) : (
+    'empty state'
+  );
 }
 
 export default Posts;
@@ -17,9 +44,13 @@ export default Posts;
 export async function getStaticProps(context: any) {
   const { page } = context.params;
   const pageNo = Number(page);
-  const posts = await postService.getPostsByPage({ pageNo });
+  const postsPage = await postService.getPostsPage({ pageNo });
   return {
-    props: { posts },
+    props: {
+      posts: postsPage.items,
+      pageNo,
+      totalPages: postsPage.totalPages,
+    },
   };
 }
 
