@@ -1,4 +1,4 @@
-export const categories = ['books', 'tutorials'] as const;
+const categories = ['books', 'tutorials'] as const;
 
 export type Category = typeof categories[number];
 

@@ -1,4 +1,4 @@
-import { POSTS_DIRECTORY } from 'consts/posts-directory';
+import { POSTS_DIRECTORY } from 'constants/posts-directory';
 import * as fs from 'fs';
 import matter from 'gray-matter';
 import preval from 'next-plugin-preval';

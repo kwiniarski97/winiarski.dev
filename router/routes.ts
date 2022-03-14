@@ -8,7 +8,7 @@ export const routes = {
     return `/post/${slug}`;
   },
   getHomeRoute() {
-    return '/';
+    return '/1';
   },
   getPostsPage(page: number) {
     return `/${page}`;

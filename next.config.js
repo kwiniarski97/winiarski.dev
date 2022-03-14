@@ -32,7 +32,7 @@ module.exports = withPreval(
         {
           source: '/',
           destination: '/1',
-          permanent: false,
+          permanent: true,
         },
       ];
     },

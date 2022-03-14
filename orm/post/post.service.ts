@@ -1,4 +1,4 @@
-import { PAGE_SIZE } from 'consts/page-size';
+import { PAGE_SIZE } from 'constants/page-size';
 import { Page } from 'models/page';
 import { PostFilterModel } from 'orm/post/post-filter.model';
 import { Post } from 'orm/post/post.model';

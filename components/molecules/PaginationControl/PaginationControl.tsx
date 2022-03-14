@@ -16,12 +16,12 @@ export function PaginationControl({
   const isFirstPage = page <= 1;
   const isLastPage = page >= totalPages;
   return (
-    <div className="px-3">
+    <div className="px-3 grid grid-cols-2">
       {!isFirstPage && (
         <Button
           theme={ButtonTheme.Primary}
           onClick={onPreviousPageClick}
-          className="float-left"
+          className="justify-self-start"
         >
           Previous
         </Button>
@@ -30,7 +30,7 @@ export function PaginationControl({
         <Button
           theme={ButtonTheme.Primary}
           onClick={onNextPageClick}
-          className="float-right"
+          className="justify-self-end"
         >
           Next
         </Button>
