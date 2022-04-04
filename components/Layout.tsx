@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { LoadingIndicator } from 'components/atoms/LoadingIndicator/LoadingIndicator';
 import { useGlobalLoadingContext } from 'features/loading/GlobalLoadingProvider';
 import { ThemeContext } from 'features/themes/ThemeProvider';
@@ -10,7 +11,7 @@ function Layout({ children }: PropsWithChildren<{}>) {
 
   console.log('layout is loading', isLoading);
   return (
-    <div className={currentThemeClass}>
+    <div className={clsx(currentThemeClass, 'min-h-screen')}>
       <Header></Header>
       <LoadingIndicator isLoading={isLoading} indeterminate />
       <Aside></Aside>

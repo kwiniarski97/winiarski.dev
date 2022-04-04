@@ -24,7 +24,7 @@
   --secondary-800: rgb(151, 18, 151);
   --secondary-900: rgb(123, 15, 123);
 
-  @apply bg-stone-50;
+  @apply bg-slate-50;
 }
 
 h1 {

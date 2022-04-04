@@ -28,7 +28,7 @@ export function PostCard({ post }: PropsWithChildren<PostCardProps>) {
           />
         </div>
       )}
-      <div className="md:w-3/4 flex flex-col justify-between p-4 gap-3">
+      <div className="md:min-w-3/4 w-full flex flex-col justify-between p-4 gap-3">
         <div className="flex-grow">
           <Link href={routes.getPostRoute(post.slug)}>
             <H1>{post.title}</H1>

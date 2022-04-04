@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { Button, ButtonTheme } from 'components/atoms/Button/Button';
 
 interface PaginationControlProps {
@@ -16,25 +17,21 @@ export function PaginationControl({
   const isFirstPage = page <= 1;
   const isLastPage = page >= totalPages;
   return (
-    <div className="px-3 grid grid-cols-2">
-      {!isFirstPage && (
-        <Button
-          theme={ButtonTheme.Primary}
-          onClick={onPreviousPageClick}
-          className="justify-self-start"
-        >
-          Previous
-        </Button>
-      )}
-      {!isLastPage && (
-        <Button
-          theme={ButtonTheme.Primary}
-          onClick={onNextPageClick}
-          className="justify-self-end"
-        >
-          Next
-        </Button>
-      )}
+    <div className="px-3 flex justify-between">
+      <Button
+        theme={ButtonTheme.Primary}
+        onClick={onPreviousPageClick}
+        className={clsx(isFirstPage && 'invisible')}
+      >
+        Previous
+      </Button>
+      <Button
+        theme={ButtonTheme.Primary}
+        onClick={onNextPageClick}
+        className={clsx(isLastPage && 'invisible')}
+      >
+        Next
+      </Button>
     </div>
   );
 }
